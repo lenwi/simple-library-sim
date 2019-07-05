@@ -9,8 +9,7 @@ public class main {
 
         TryAgain();
     }
-
-
+    
     private static void IsMe(int i) {
         if (i == 6){
 

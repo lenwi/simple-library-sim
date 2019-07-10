@@ -1,5 +1,7 @@
 package ui;
 
+
+
 public class Game {
     public static void main(String[] args) {
         //TODO create new game()
@@ -19,7 +21,8 @@ public class Game {
         //TODO start new game
 
         // new game options
-        //TODO get opponent into sout line
+        //TODO get opponent into sout line (Random util)
+
         System.out.println("Your current opponent is: " + "insert opp");
         System.out.println("What would you like to do?");
 

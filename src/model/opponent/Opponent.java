@@ -23,7 +23,7 @@ public class Opponent {
     // MODIFIES: this
     // EFFECTS: sets this opponent's name to given name
     public void setName (String name) {
-        this.name =name;
+        this.name = name;
     }
 
     // MODIFIES: this

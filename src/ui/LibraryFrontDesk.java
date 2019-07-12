@@ -1,5 +1,6 @@
 package ui;
 
+import model.library.Book;
 import model.library.Library;
 import model.members.AgeGroup;
 import model.members.Member;
@@ -12,6 +13,10 @@ public class LibraryFrontDesk {
     private Library library;
     private Member m1;
     private Member m2;
+    private Book b1;
+    private Book b2;
+    private Book b3;
+    private Book b4;
 
 
     public static void main(String[] args) {
@@ -28,6 +33,7 @@ public class LibraryFrontDesk {
     public LibraryFrontDesk() {
         library = new Library();
         loadMembers();
+        loadBooks();
     }
 
     // getters
@@ -43,6 +49,20 @@ public class LibraryFrontDesk {
 
         library.addMember(m1);
         library.addMember(m2);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads books in the library
+    private void loadBooks() {
+        b1 = new Book("The Lord of the Rings", "Fantasy");
+        b2 = new Book("Murder on the Orient Express", "Mystery");
+        b3 = new Book("It", "Horror");
+        b4 = new Book("The Cat in the Hat", "Children's Book");
+
+        library.addBook(b1);
+        library.addBook(b2);
+        library.addBook(b3);
+        library.addBook(b4);
     }
 
 }

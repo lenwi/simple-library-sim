@@ -1,5 +1,6 @@
 package ui;
 
+import model.library.Book;
 import model.library.Library;
 import model.members.Member;
 
@@ -9,9 +10,9 @@ public class FrontDesk {
 
     private static final String SIGN_UP = "sign up";
     private static final String CHECK_MEMBERS = "check";
-//    private static final String BROWSE = "browse";
-//    private static final String BORROW = "borrow";
-//    private static final String RETURN = "return";
+    private static final String BROWSE = "browse";
+    private static final String BORROW = "borrow";
+    private static final String RETURN = "return";
     private static final String QUIT = "quit";
 
     private Scanner input;
@@ -43,9 +44,9 @@ public class FrontDesk {
     private void printInstructions() {
         System.out.println("\nEnter: \n'"+ SIGN_UP +"' to activate a library account.");
         System.out.println("'"+ CHECK_MEMBERS +"' to find other members and any books they have borrowed.");
-//        System.out.println("'"+ BROWSE +"' to browse books.");
-//        System.out.println("'"+ BORROW +"' to check out a book.");
-//        System.out.println("'"+ RETURN +"' to return a book.");
+        System.out.println("'"+ BROWSE +"' to browse books.");
+        System.out.println("'"+ BORROW +"' to check out a book.");
+        System.out.println("'"+ RETURN +"' to return a book.");
         System.out.println("\n'"+ QUIT +"' to quit.");
     }
 
@@ -59,9 +60,9 @@ public class FrontDesk {
                 case CHECK_MEMBERS:
                     checkMembers();
                     break;
-//                case BROWSE:
-//                    browseBooks();
-//                    break;
+                case BROWSE:
+                    browseBooks();
+                    break;
 //                case BORROW:
 //                    borrowBook();
 //                    break;
@@ -95,11 +96,22 @@ public class FrontDesk {
         printInstructions();
     }
 
-    // EFFECTS: prints profiles of all members
+    // EFFECTS: prints profiles of all members in the form Name: AgeGroup
     private void checkMembers() {
+        System.out.println("Name: Age||\n");
         for (Member m: library.getMembers()) {
             System.out.println(m.getName() + ": " + m.getAgeGroup());
         }
+        printInstructions();
+    }
+
+    // EFFECTS: prints all books currently in the library in the form Title: Genre
+    private void browseBooks() {
+        System.out.println("Title: Genre||\n");
+        for (Book b: library.getBooks()) {
+            System.out.println(b.getTitle() + ": " + b.getGenre());
+        }
+        printInstructions();
     }
 
 

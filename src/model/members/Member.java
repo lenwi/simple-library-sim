@@ -25,6 +25,7 @@ public class Member {
     // EFFECTS: sets this member's age group to given age group
     public void setAgeGroup(AgeGroup ageGroup) { this.ageGroup = ageGroup; }
 
+    // REQUIRE: positive integer
     // MODIFIES: this
     // EFFECTS: when given an int, set the agegroup as follows:
     //          0-12 CHILD, 13-18 ADOLESCENCE, 19+ ADULT

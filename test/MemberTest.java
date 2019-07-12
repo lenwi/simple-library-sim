@@ -17,7 +17,7 @@ public class MemberTest {
 
     @Test
     public void testSortAge() {
-        testMember.sortAge(1);
+        testMember.sortAge(0);
         assertTrue(testMember.getAgeGroup() == AgeGroup.CHILD);
         testMember.sortAge(5);
         assertTrue(testMember.getAgeGroup() == AgeGroup.CHILD);

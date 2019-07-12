@@ -87,13 +87,20 @@ public class FrontDesk {
         m = new Member(name);
         System.out.println("Next, please enter your age so we can place you in the appropriate" +
                 " age group.");
-        m.sortAge(input.nextInt());
+        if (input.hasNextInt()){
+            m.sortAge(input.nextInt());
 
-        library.addMember(m);
+            library.addMember(m);
 
-        System.out.println(m.getName() + " has been signed up in the: " + m.getAgeGroup() +
-                " group.");
-        printInstructions();
+            System.out.println(m.getName() + " has been signed up in the: " + m.getAgeGroup() +
+                    " group.");
+
+            printInstructions();
+        } else {
+            System.out.println("Sorry wrong input, try again.");
+
+            printInstructions();
+        }
     }
 
     // EFFECTS: prints profiles of all members in the form Name: AgeGroup

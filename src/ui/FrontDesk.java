@@ -11,9 +11,14 @@ public class FrontDesk {
     private static final String SIGN_UP = "sign up";
     private static final String CHECK_MEMBERS = "check";
     private static final String BROWSE = "browse";
+    private static final String RECOMMEND = "recommend";
     private static final String BORROW = "borrow";
     private static final String RETURN = "return";
     private static final String QUIT = "quit";
+    private static final String FANTASY = "Fantasy";
+    private static final String MYSTERY = "Mystery";
+    private static final String CHILDREN_BOOK = "Children's book";
+    private static final String HORROR = "Horror";
 
     private Scanner input;
     private boolean runProgram;
@@ -45,6 +50,7 @@ public class FrontDesk {
         System.out.println("\nEnter: \n'"+ SIGN_UP +"' to activate a library account.");
         System.out.println("'"+ CHECK_MEMBERS +"' to find other members and any books they have borrowed.");
         System.out.println("'"+ BROWSE +"' to browse books.");
+        System.out.println("'"+ RECOMMEND +"' to discover a book based on genre.");
         System.out.println("'"+ BORROW +"' to check out a book.");
         System.out.println("'"+ RETURN +"' to return a book.");
         System.out.println("\n'"+ QUIT +"' to quit.");
@@ -62,6 +68,9 @@ public class FrontDesk {
                     break;
                 case BROWSE:
                     browseBooks();
+                    break;
+                case RECOMMEND:
+                    recommendBooks();
                     break;
 //                case BORROW:
 //                    borrowBook();
@@ -117,6 +126,20 @@ public class FrontDesk {
         System.out.println("Title: Genre||\n");
         for (Book b: library.getBooks()) {
             System.out.println(b.getTitle() + ": " + b.getGenre());
+        }
+        printInstructions();
+    }
+
+    //
+    private void recommendBooks() {
+        System.out.println("Please select a genre: '"+ FANTASY +"', '"+ MYSTERY +"', '"+ CHILDREN_BOOK +"'," +
+                " '"+ HORROR +"' ");
+        String genre = input.nextLine();
+        System.out.println("Here are some " + genre + " books: \n");
+        for (Book b: library.getBooks()) {
+            if (b.getGenre().equals(genre)) {
+                System.out.println(b.getTitle());
+            }
         }
         printInstructions();
     }

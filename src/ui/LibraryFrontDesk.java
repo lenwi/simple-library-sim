@@ -17,6 +17,7 @@ public class LibraryFrontDesk {
     private Book b2;
     private Book b3;
     private Book b4;
+    private Book b5;
 
 
     public static void main(String[] args) {
@@ -58,11 +59,13 @@ public class LibraryFrontDesk {
         b2 = new Book("Murder on the Orient Express", "Mystery");
         b3 = new Book("It", "Horror");
         b4 = new Book("The Cat in the Hat", "Children's Book");
+        b5 = new Book("Eragon", "Fantasy");
 
         library.addBook(b1);
         library.addBook(b2);
         library.addBook(b3);
         library.addBook(b4);
+        library.addBook(b5);
     }
 
 }

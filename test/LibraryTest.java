@@ -5,9 +5,10 @@ import model.members.Member;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import java.io.IOException;
+
+import static javax.script.ScriptEngine.FILENAME;
+import static org.junit.Assert.*;
 
 public class LibraryTest {
     Library testLibrary;
@@ -50,4 +51,16 @@ public class LibraryTest {
         assertEquals(testLibrary.getBooks().size(), 2);
 
     }
+
+    @Test
+    public void testSaveLoad() throws IOException {
+        Member m0;
+        m0 = new Member("tester");
+        m0.setAgeGroup(AgeGroup.ADULT);
+        testLibrary.readMembers();
+        assertTrue(FILENAME.length() > 0);
+        testLibrary.addMember(m0);
+        testLibrary.writeMembers();
+    }
+
 }

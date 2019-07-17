@@ -1,8 +1,8 @@
 package model.library;
 
-import model.members.AgeGroup;
 import model.members.Member;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static ui.LibraryFrontDesk.split;
 
-public class Library {
+public class Library implements Loadable, Saveable {
 
     static String FILENAME = "members.txt";
     static String SPLIT_CHAR = "\t";
@@ -23,24 +23,27 @@ public class Library {
     public Library() {
         members = new ArrayList<>();
         books = new ArrayList<>();
-        Member m1 = new Member("Bob");
-        m1.setAgeGroup(AgeGroup.ADULT);
-        Member m2 = new Member("Jill");
-        m2.setAgeGroup(AgeGroup.ADOLESCENCE);
-        addMember(m1);
-        addMember(m2);
     }
 
+    @Override
+    // REQUIRES: a valid member
+    // MODIFIES: this/file
+    // EFFECTS: writes in member info to a text file
     public void writeMembers() throws IOException {
 
-        PrintWriter writer = new PrintWriter(FILENAME, "UTF-8");
+        PrintWriter writer = new PrintWriter(new FileWriter(FILENAME, true));
         for (Member m: members) {
             System.out.println("Writing member details: " + m.getName());
             writer.println(m.getName() + SPLIT_CHAR + m.getAgeGroup());
         }
+        writer.flush();
         writer.close();
     }
 
+    @Override
+    // REQUIRES: a valid file
+    // MODIFIES: this/file
+    // EFFECTS: reads members from a text file
     public void readMembers() throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(FILENAME));
 

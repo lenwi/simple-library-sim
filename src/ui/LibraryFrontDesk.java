@@ -12,8 +12,8 @@ import java.util.List;
 
 public class LibraryFrontDesk {
 
-    static String FILENAME = "members.txt";
-    static String SPLIT_CHAR = "\t";
+    private static String FILENAME = "members.txt";
+    private static String SPLIT_CHAR = "\t";
 
     private Library library;
     private Member m1;
@@ -37,7 +37,7 @@ public class LibraryFrontDesk {
     }
 
     public LibraryFrontDesk() throws IOException {
-        library = new Library();
+        this.library = new Library();
         loadMembers();
         loadBooks();
     }

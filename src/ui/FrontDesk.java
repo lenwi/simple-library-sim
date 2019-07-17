@@ -4,6 +4,7 @@ import model.library.Book;
 import model.library.Library;
 import model.members.Member;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class FrontDesk {
@@ -32,7 +33,7 @@ public class FrontDesk {
     }
 
     // EFFECTS: parses user input until user quits
-    public void handleInput() {
+    public void handleInput() throws IOException {
         System.out.println("What would you like to do?");
         printInstructions();
         String str;
@@ -57,7 +58,7 @@ public class FrontDesk {
     }
 
     // EFFECTS: prints menu options and info depending on user input
-    private void parseInput(String str) {
+    private void parseInput(String str) throws IOException {
         if (str.length() > 0) {
             switch (str) {
                 case SIGN_UP:
@@ -90,34 +91,37 @@ public class FrontDesk {
 
     // MODIFIES: this
     // EFFECTS: sign up using prompts and user inputs
-    private void signUpMember() {
+    private void signUpMember() throws IOException {
         System.out.println("To set up your account, \nPlease enter your name.");
         String name = input.nextLine();
         m = new Member(name);
         System.out.println("Next, please enter your age so we can place you in the appropriate" +
                 " age group.");
-        if (input.hasNextInt()){
+        if (input.hasNextInt()) {
             m.sortAge(input.nextInt());
 
             library.addMember(m);
+            library.writeMembers();
 
-            System.out.println(m.getName() + " has been signed up in the: " + m.getAgeGroup() +
-                    " group.");
+                System.out.println(m.getName() + " has been signed up in the: " + m.getAgeGroup() +
+                        " group.");
 
-            printInstructions();
-        } else {
-            System.out.println("Sorry wrong input, try again.");
+                printInstructions();
+            } else{
+                System.out.println("Sorry wrong input, try again.");
 
-            printInstructions();
-        }
+                printInstructions();
+            }
     }
 
     // EFFECTS: prints profiles of all members in the form Name: AgeGroup
-    private void checkMembers() {
+    private void checkMembers() throws IOException {
         System.out.println("Name: Age||\n");
-        for (Member m: library.getMembers()) {
-            System.out.println(m.getName() + ": " + m.getAgeGroup());
-        }
+        library.readMembers();
+
+//        for (Member m: library.getMembers()) {
+//            System.out.println(m.getName() + ": " + m.getAgeGroup());
+//        }
         printInstructions();
     }
 

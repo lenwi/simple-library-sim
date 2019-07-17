@@ -2,13 +2,18 @@ package ui;
 
 import model.library.Book;
 import model.library.Library;
-import model.members.AgeGroup;
 import model.members.Member;
 
-
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 
 public class LibraryFrontDesk {
+
+    static String FILENAME = "members.txt";
+    static String SPLIT_CHAR = "\t";
 
     private Library library;
     private Member m1;
@@ -20,7 +25,7 @@ public class LibraryFrontDesk {
     private Book b5;
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         LibraryFrontDesk libraryfrontdesk = new LibraryFrontDesk();
         FrontDesk frontDesk = new FrontDesk(libraryfrontdesk.getLibrary());
         System.out.println("Welcome to the library!");
@@ -31,7 +36,7 @@ public class LibraryFrontDesk {
         System.out.println("Have a nice day!");
     }
 
-    public LibraryFrontDesk() {
+    public LibraryFrontDesk() throws IOException {
         library = new Library();
         loadMembers();
         loadBooks();
@@ -42,15 +47,27 @@ public class LibraryFrontDesk {
 
     // MODIFIES: this
     // EFFECTS: loads members of the library
-    private void loadMembers() {
-        m1 = new Member("Bob");
-        m1.setAgeGroup(AgeGroup.ADULT);
-        m2 = new Member("Jill");
-        m2.setAgeGroup(AgeGroup.ADOLESCENCE);
+    private void loadMembers() throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get(FILENAME));
 
-        library.addMember(m1);
-        library.addMember(m2);
+        for (String line: lines) {
+            String[] parts = split(line);
+
+            String name = parts[0];
+            String agegroup = parts[1];
+
+            System.out.println("Loaded member: " + name + ": " + agegroup);
+        }
+//        m1 = new Member("Bob");
+//        m1.setAgeGroup(AgeGroup.ADULT);
+//        m2 = new Member("Jill");
+//        m2.setAgeGroup(AgeGroup.ADOLESCENCE);
+//
+//        library.addMember(m1);
+//        library.addMember(m2);
     }
+
+    public static String[] split(String line) { return line.split(SPLIT_CHAR); }
 
     // MODIFIES: this
     // EFFECTS: loads books in the library

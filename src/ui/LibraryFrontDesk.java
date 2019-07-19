@@ -2,6 +2,7 @@ package ui;
 
 import model.library.Book;
 import model.library.Library;
+import model.library.Newspaper;
 import model.members.Member;
 
 import java.io.IOException;
@@ -16,8 +17,6 @@ public class LibraryFrontDesk {
     private static String SPLIT_CHAR = "\t";
 
     private Library library;
-    private Member m1;
-    private Member m2;
     private Book b1;
     private Book b2;
     private Book b3;

@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static javax.script.ScriptEngine.FILENAME;
 import static org.junit.Assert.*;
 
 public class LibraryTest {
@@ -57,10 +56,10 @@ public class LibraryTest {
         Member m0;
         m0 = new Member("tester");
         m0.setAgeGroup(AgeGroup.ADULT);
-        testLibrary.readMembers();
-        assertTrue(FILENAME.length() > 0);
         testLibrary.addMember(m0);
-        testLibrary.writeMembers();
+        testLibrary.writeFile("test.txt");
+        testLibrary.readFile("test.txt");
+        assertTrue("test.txt".length() > 0);
     }
 
 }

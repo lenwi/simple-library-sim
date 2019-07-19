@@ -2,6 +2,7 @@ package ui;
 
 import model.library.Book;
 import model.library.Library;
+import model.library.Newspaper;
 import model.members.Member;
 
 import java.io.IOException;
@@ -13,6 +14,7 @@ public class FrontDesk {
     private static final String CHECK_MEMBERS = "check";
     private static final String BROWSE = "browse";
     private static final String RECOMMEND = "recommend";
+    private static final String NEWS = "news";
     private static final String BORROW = "borrow";
     private static final String RETURN = "return";
     private static final String QUIT = "quit";
@@ -24,12 +26,14 @@ public class FrontDesk {
     private Scanner input;
     private boolean runProgram;
     private Library library;
+    private Newspaper newspaper;
     private Member m;
 
     public FrontDesk(Library library) {
         input = new Scanner(System.in);
         runProgram = true;
         this.library = library;
+        this.newspaper = new Newspaper("UBC NEWS", "1", 10);
     }
 
     // EFFECTS: parses user input until user quits
@@ -51,7 +55,8 @@ public class FrontDesk {
         System.out.println("\nEnter: \n'"+ SIGN_UP +"' to activate a library account.");
         System.out.println("'"+ CHECK_MEMBERS +"' to find other members and any books they have borrowed.");
         System.out.println("'"+ BROWSE +"' to browse books.");
-        System.out.println("'"+ RECOMMEND +"' to discover a book based on genre.");
+        System.out.println("'"+ RECOMMEND +"' to discover a book based on category.");
+        System.out.println("'"+ NEWS +"' to read the news.");
         System.out.println("'"+ BORROW +"' to check out a book.");
         System.out.println("'"+ RETURN +"' to return a book.");
         System.out.println("\n'"+ QUIT +"' to quit.");
@@ -72,6 +77,9 @@ public class FrontDesk {
                     break;
                 case RECOMMEND:
                     recommendBooks();
+                    break;
+                case NEWS:
+                    readNews();
                     break;
 //                case BORROW:
 //                    borrowBook();
@@ -101,7 +109,7 @@ public class FrontDesk {
             m.sortAge(input.nextInt());
 
             library.addMember(m);
-            library.writeMembers();
+            library.writeFile("members.txt");
 
                 System.out.println(m.getName() + " has been signed up in the: " + m.getAgeGroup() +
                         " group.");
@@ -117,11 +125,7 @@ public class FrontDesk {
     // EFFECTS: prints profiles of all members in the form Name: AgeGroup
     private void checkMembers() throws IOException {
         System.out.println("Name: Age||\n");
-        library.readMembers();
-
-//        for (Member m: library.getMembers()) {
-//            System.out.println(m.getName() + ": " + m.getAgeGroup());
-//        }
+        library.readFile("members.txt");
         printInstructions();
     }
 
@@ -129,22 +133,32 @@ public class FrontDesk {
     private void browseBooks() {
         System.out.println("Title: Genre||\n");
         for (Book b: library.getBooks()) {
-            System.out.println(b.getTitle() + ": " + b.getGenre());
+            System.out.println(b.getTitle() + ": " + b.getCategory());
         }
         printInstructions();
     }
 
-    //
+    // EFFECTS: prints a list of books of a given genre
     private void recommendBooks() {
-        System.out.println("Please select a genre: '"+ FANTASY +"', '"+ MYSTERY +"', '"+ CHILDREN_BOOK +"'," +
+        System.out.println("Please select a category: '"+ FANTASY +"', '"+ MYSTERY +"', '"+ CHILDREN_BOOK +"'," +
                 " '"+ HORROR +"' ");
         String genre = input.nextLine();
         System.out.println("Here are some " + genre + " books: \n");
         for (Book b: library.getBooks()) {
-            if (b.getGenre().equals(genre)) {
+            if (b.getCategory().equals(genre)) {
                 System.out.println(b.getTitle());
             }
         }
+        printInstructions();
+    }
+
+    // EFFECTS: takes out a newspaper
+    private void readNews() throws IOException {
+        newspaper.readFile("newspaper.txt");
+        newspaper.takeNewspaper();
+        newspaper.writeFile("newspaper.txt");
+        System.out.println("\n \n Enter any key to go back to the front desk.");
+        input.nextLine();
         printInstructions();
     }
 

@@ -1,25 +1,17 @@
 package model.library;
 
-public class Book {
-
-    private String title;
-    private String genre;
+public class Book extends Readable {
 
     public Book(String title, String genre) {
-        this.title = title;
-        this.genre = genre;
+        super(title, genre);
     }
 
-    // getters
-
-    public String getTitle() { return title; }
-    public String getGenre() { return genre; }
-
-    // MODIFIES: this
-    // EFFECTS: sets this book's title to given title
-    public void setTitle(String title) { this.title = title; }
+    // EFFECTS: returns this book's category
+    @Override
+    public String getCategory() { return category; }
 
     // MODIFIES: this
-    // EFFECTS: sets this book's genre to given genre
-    public void setGenre(String genre) { this.genre = genre; }
+    // EFFECTS: sets this book's category to given category
+    @Override
+    public void setCategory(String category) { this.category = category; }
 }

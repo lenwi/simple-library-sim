@@ -2,6 +2,7 @@ package model.library;
 
 import model.members.Member;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,9 +30,9 @@ public class Library implements Loadable, Saveable {
     // REQUIRES: a valid member
     // MODIFIES: this/file
     // EFFECTS: writes in member info to a text file
-    public void writeMembers() throws IOException {
+    public void writeFile(String file) throws IOException {
 
-        PrintWriter writer = new PrintWriter(new FileWriter(FILENAME, true));
+        PrintWriter writer = new PrintWriter(new FileWriter(file, true));
         for (Member m: members) {
             System.out.println("Writing member details: " + m.getName());
             writer.println(m.getName() + SPLIT_CHAR + m.getAgeGroup());
@@ -44,8 +45,8 @@ public class Library implements Loadable, Saveable {
     // REQUIRES: a valid file
     // MODIFIES: this/file
     // EFFECTS: reads members from a text file
-    public void readMembers() throws IOException {
-        List<String> lines = Files.readAllLines(Paths.get(FILENAME));
+    public void readFile(String file) throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get(file));
 
         for (String line: lines) {
             String[] parts = split(line);

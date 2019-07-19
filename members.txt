@@ -1,0 +1,5 @@
+Bob	ADULT
+Jill	ADOLESCENCE
+me	CHILD
+me	CHILD
+me 2	ADULT

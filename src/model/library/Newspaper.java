@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import static model.library.Library.SPLIT_CHAR;
+import static ui.LibraryFrontDesk.smallSplit;
 import static ui.LibraryFrontDesk.split;
 
 public class Newspaper extends Readable implements Saveable,Loadable {
@@ -42,7 +43,7 @@ public class Newspaper extends Readable implements Saveable,Loadable {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets this newspaper's quantity to given quantity
+    // EFFECTS: sets this newspaper's issueNum to given issueNum
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
@@ -79,14 +80,18 @@ public class Newspaper extends Readable implements Saveable,Loadable {
         List<String> lines = Files.readAllLines(Paths.get(file));
 
         for (String line: lines) {
-            String[] parts = split(line);
+            String[] parts = smallSplit(line);
 
             String issue = parts[0];
-            String quantity = parts[1];
+            String hash = parts[1];
+            String num = parts[2];
+            String quantity = parts[3];
+            setCategory(num);
+            setQuantity(Integer.parseInt(quantity));
 
             System.out.println("Here is " + getTitle() + " " + issue);
             System.out.println("\n There are " + quantity + " left of "
-                    + issue + ".");
+                    + issue + " " + hash + " " + num + ".");
         }
     }
 }

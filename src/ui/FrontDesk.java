@@ -33,7 +33,7 @@ public class FrontDesk {
         input = new Scanner(System.in);
         runProgram = true;
         this.library = library;
-        this.newspaper = new Newspaper("UBC NEWS", "1", 10);
+        this.newspaper = new Newspaper("UBC NEWS", "01", 10);
     }
 
     // EFFECTS: parses user input until user quits

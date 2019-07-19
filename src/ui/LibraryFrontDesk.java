@@ -15,6 +15,7 @@ public class LibraryFrontDesk {
 
     private static String FILENAME = "members.txt";
     private static String SPLIT_CHAR = "\t";
+    private static String SPLIT_SPACE = "\\s+";
 
     private Library library;
     private Book b1;
@@ -67,6 +68,7 @@ public class LibraryFrontDesk {
     }
 
     public static String[] split(String line) { return line.split(SPLIT_CHAR); }
+    public static String[] smallSplit(String line) { return line.split(SPLIT_SPACE); }
 
     // MODIFIES: this
     // EFFECTS: loads books in the library

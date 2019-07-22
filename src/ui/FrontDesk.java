@@ -153,13 +153,23 @@ public class FrontDesk {
     }
 
     // EFFECTS: takes out a newspaper
-    private void readNews() throws IOException {
-        newspaper.readFile("newspaper.txt");
+    private void readNews() {
+        try {
+            newspaper.readFile("newspaper.txt");
+        } catch (IOException e) {
+            System.out.println("File not found, returning to menu.");
+        }
         newspaper.takeNewspaper();
-        newspaper.writeFile("newspaper.txt");
-        System.out.println("\n \n Enter any key to go back to the front desk.");
-        input.nextLine();
-        printInstructions();
+        try {
+            newspaper.writeFile("newspaper.txt");
+        } catch (IOException e) {
+            System.out.println("File not found, returning to menu.");
+        }
+        finally {
+            System.out.println("\n \n Enter any key to go back to the front desk.");
+            input.nextLine();
+            printInstructions();
+        }
     }
 
 

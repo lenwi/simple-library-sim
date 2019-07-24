@@ -12,6 +12,7 @@ public class ExceptionsTest {
         Newspaper testNewspaper = new Newspaper("t", "1", 5);
         try{
             testNewspaper.readFile("testnews.txt");
+            fail("Exception should have been thrown, file does not exist");
         } catch (IOException e) {
             // Supposed to be caught
         }

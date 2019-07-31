@@ -1,4 +1,4 @@
-package tests;
+
 
 import model.members.AgeGroup;
 import model.members.Member;

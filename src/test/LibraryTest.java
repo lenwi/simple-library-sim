@@ -1,4 +1,3 @@
-package tests;
 
 import model.library.Book;
 import model.library.Library;

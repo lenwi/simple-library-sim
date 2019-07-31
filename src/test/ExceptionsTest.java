@@ -1,4 +1,4 @@
-package tests;
+
 
 import model.library.Newspaper;
 import org.junit.Test;

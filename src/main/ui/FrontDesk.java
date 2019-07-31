@@ -47,7 +47,7 @@ public class FrontDesk {
             if (input.hasNext()) {
                 str = input.nextLine();
                 str = makeString(str);
-                parseInput(str);
+                parseInputOne(str);
             }
         }
     }
@@ -64,7 +64,29 @@ public class FrontDesk {
     }
 
     // EFFECTS: prints menu options and info depending on user input
-    private void parseInput(String str) throws IOException {
+    private void parseInputOne(String str) throws IOException {
+        if (str.length() > 0) {
+            switch (str) {
+                case NEWS:
+                    readNews();
+                    break;
+                case BORROW:
+                    borrowBook();
+                    break;
+                case RETURN:
+                    returnBook();
+                    break;
+                case QUIT:
+                    runProgram = false;
+                    break;
+                default:
+                    parseInputTwo(str);
+            }
+        }
+    }
+
+    // EFFECTS: prints menu options and info depending on user input
+    private void parseInputTwo(String str) throws IOException {
         if (str.length() > 0) {
             switch (str) {
                 case SIGN_UP:
@@ -79,21 +101,8 @@ public class FrontDesk {
                 case RECOMMEND:
                     recommendBooks();
                     break;
-                case NEWS:
-                    readNews();
-                    break;
-                case BORROW:
-                    borrowBook();
-                    break;
-                case RETURN:
-                    returnBook();
-                    break;
-                case QUIT:
-                    runProgram = false;
-                    break;
                 default:
                     System.out.println("Wrong input, try again.");
-                    break;
             }
         }
     }

@@ -28,7 +28,7 @@ public class FrontDesk {
     private boolean runProgram;
     private Library library;
     private Newspaper newspaper;
-    private Member m;
+    private Member member;
 
     public FrontDesk(Library library) {
         input = new Scanner(System.in);
@@ -43,8 +43,8 @@ public class FrontDesk {
         printInstructions();
         String str;
 
-        while(runProgram) {
-            if(input.hasNext()) {
+        while (runProgram) {
+            if (input.hasNext()) {
                 str = input.nextLine();
                 str = makeString(str);
                 parseInput(str);
@@ -53,14 +53,14 @@ public class FrontDesk {
     }
 
     private void printInstructions() {
-        System.out.println("\nEnter: \n'"+ SIGN_UP +"' to activate a library account.");
-        System.out.println("'"+ CHECK_MEMBERS +"' to find other members and any books they have borrowed.");
-        System.out.println("'"+ BROWSE +"' to browse books.");
-        System.out.println("'"+ RECOMMEND +"' to discover a book based on category.");
-        System.out.println("'"+ NEWS +"' to read the news.");
-        System.out.println("'"+ BORROW +"' to check out a book.");
-        System.out.println("'"+ RETURN +"' to return a book.");
-        System.out.println("\n'"+ QUIT +"' to quit.");
+        System.out.println("\nEnter: \n'" + SIGN_UP + "' to activate a library account.");
+        System.out.println("'" + CHECK_MEMBERS + "' to find other members and any books they have borrowed.");
+        System.out.println("'" + BROWSE + "' to browse books.");
+        System.out.println("'" + RECOMMEND + "' to discover a book based on category.");
+        System.out.println("'" + NEWS + "' to read the news.");
+        System.out.println("'" + BORROW + "' to check out a book.");
+        System.out.println("'" + RETURN + "' to return a book.");
+        System.out.println("\n'" + QUIT + "' to quit.");
     }
 
     // EFFECTS: prints menu options and info depending on user input
@@ -103,25 +103,26 @@ public class FrontDesk {
     private void signUpMember() throws IOException {
         System.out.println("To set up your account, \nPlease enter a username.");
         String name = input.nextLine();
-        m = new Member(name);
-        System.out.println("Next, please enter your age so we can place you in the appropriate" +
-                " age group.");
+        member = new Member(name);
+        System.out.println("Next, please enter your age so we can place you in the appropriate"
+                + " age group.");
         if (input.hasNextInt()) {
-            m.sortAge(input.nextInt());
+            member.sortAge(input.nextInt());
 
-            library.addMember(m);
+            library.addMember(member);
             library.addMemberHash(name);
             library.writeFile("members.txt");
 
-                System.out.println(m.getName() + " has been signed up in the: " + m.getAgeGroup() +
-                        " group.");
+            System.out.println(member.getName() + " has been signed up in the: "
+                    + member.getAgeGroup()
+                    + " group.");
 
-                printInstructions();
-            } else{
-                System.out.println("Sorry wrong input, try again.");
+            printInstructions();
+        } else {
+            System.out.println("Sorry wrong input, try again.");
 
-                printInstructions();
-            }
+            printInstructions();
+        }
     }
 
     // EFFECTS: prints profiles of all members in the form Name: AgeGroup
@@ -142,8 +143,8 @@ public class FrontDesk {
 
     // EFFECTS: prints a list of books of a given genre
     private void recommendBooks() {
-        System.out.println("Please select a category: '"+ FANTASY +"', '"+ MYSTERY +"', '"+ CHILDREN_BOOK +"'," +
-                " '"+ HORROR +"' ");
+        System.out.println("Please select a category: '" + FANTASY + "', '" + MYSTERY + "', '" + CHILDREN_BOOK
+                + "'," + " '" + HORROR + "' ");
         String genre = input.nextLine();
         System.out.println("Here are some " + genre + " books: \n");
         for (Book b: library.getBooks()) {
@@ -166,8 +167,7 @@ public class FrontDesk {
             newspaper.writeFile("newspaper.txt");
         } catch (IOException e) {
             System.out.println("File not found, returning to menu.");
-        }
-        finally {
+        } finally {
             System.out.println("\n \n Enter any key to go back to the front desk.");
             input.nextLine();
             printInstructions();
@@ -179,8 +179,8 @@ public class FrontDesk {
         String user = input.nextLine();
         ArrayList<Book> bb = library.getBookList(user);
         if (library.containsMember(user)) {
-            System.out.println("Here are the books you currently have borrowed: \n" +
-                    library.displayBorrowedBooks(bb));
+            System.out.println("Here are the books you currently have borrowed: \n"
+                    + library.displayBorrowedBooks(bb));
             System.out.println("Next, enter the title of the book you want to borrow.");
             String book = input.nextLine();
             library.borrow(user, library.findBook(book));
@@ -195,8 +195,7 @@ public class FrontDesk {
         System.out.println("Please enter your username.");
         String user = input.nextLine();
         ArrayList<Book> bb = library.getBookList(user);
-        System.out.println("Your currently borrowed books are: \n" +
-                library.displayBorrowedBooks(bb));
+        System.out.println("Your currently borrowed books are: \n" + library.displayBorrowedBooks(bb));
         System.out.println("Which book would you like to return?");
         String book = input.next();
         library.returnBook(user, library.findBorrowedBook(user, book));

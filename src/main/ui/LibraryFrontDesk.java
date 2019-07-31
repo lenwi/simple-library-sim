@@ -43,7 +43,9 @@ public class LibraryFrontDesk {
     }
 
     // getters
-    public Library getLibrary() { return library; }
+    public Library getLibrary() {
+        return library;
+    }
 
     // MODIFIES: this
     // EFFECTS: loads members of the library
@@ -67,8 +69,13 @@ public class LibraryFrontDesk {
 //        library.addMember(m2);
     }
 
-    public static String[] split(String line) { return line.split(SPLIT_CHAR); }
-    public static String[] smallSplit(String line) { return line.split(SPLIT_SPACE); }
+    public static String[] split(String line) {
+        return line.split(SPLIT_CHAR);
+    }
+
+    public static String[] smallSplit(String line) {
+        return line.split(SPLIT_SPACE);
+    }
 
     // MODIFIES: this
     // EFFECTS: loads books in the library

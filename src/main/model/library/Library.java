@@ -60,10 +60,20 @@ public class Library implements Loadable, Saveable {
     }
 
     // getters
-    public List<Member> getMembers() { return members; }
-    public Map<String, ArrayList<Book>> getHmMembers() { return hmMembers; }
-    public List<Book> getBooks() { return books; }
+    public List<Member> getMembers() {
+        return members;
+    }
+
+    public Map<String, ArrayList<Book>> getHmMembers() {
+        return hmMembers;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
     public ArrayList<Book> getBookList(String s) {
+
         return hmMembers.get(s);
     }
 
@@ -127,7 +137,7 @@ public class Library implements Loadable, Saveable {
         List<Book> bookList = hmMembers.get(user);
 
         // if list does not exist create it
-        if(bookList == null) {
+        if (bookList == null) {
             bookList = new ArrayList<Book>();
             bookList.add(book);
         } else {
@@ -167,11 +177,15 @@ public class Library implements Loadable, Saveable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Library library = (Library) o;
-        return Objects.equals(hmMembers, library.hmMembers) &&
-                Objects.equals(books, library.books);
+        return Objects.equals(hmMembers, library.hmMembers)
+                && Objects.equals(books, library.books);
     }
 
     @Override

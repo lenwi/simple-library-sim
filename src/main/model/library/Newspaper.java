@@ -9,9 +9,8 @@ import java.util.List;
 
 import static model.library.Library.SPLIT_CHAR;
 import static ui.LibraryFrontDesk.smallSplit;
-import static ui.LibraryFrontDesk.split;
 
-public class Newspaper extends Readable implements Saveable,Loadable {
+public class Newspaper extends Readings implements Saveable,Loadable {
     private int quantity;
 
     public Newspaper(String title, String issueNum, int quantity) {

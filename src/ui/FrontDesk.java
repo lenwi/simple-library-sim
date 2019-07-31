@@ -6,6 +6,7 @@ import model.library.Newspaper;
 import model.members.Member;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FrontDesk {
@@ -81,12 +82,12 @@ public class FrontDesk {
                 case NEWS:
                     readNews();
                     break;
-//                case BORROW:
-//                    borrowBook();
-//                    break;
-//                case RETURN:
-//                    returnBook();
-//                    break;
+                case BORROW:
+                    borrowBook();
+                    break;
+                case RETURN:
+                    returnBook();
+                    break;
                 case QUIT:
                     runProgram = false;
                     break;
@@ -100,7 +101,7 @@ public class FrontDesk {
     // MODIFIES: this
     // EFFECTS: sign up using prompts and user inputs
     private void signUpMember() throws IOException {
-        System.out.println("To set up your account, \nPlease enter your name.");
+        System.out.println("To set up your account, \nPlease enter a username.");
         String name = input.nextLine();
         m = new Member(name);
         System.out.println("Next, please enter your age so we can place you in the appropriate" +
@@ -109,6 +110,7 @@ public class FrontDesk {
             m.sortAge(input.nextInt());
 
             library.addMember(m);
+            library.addMemberHash(name);
             library.writeFile("members.txt");
 
                 System.out.println(m.getName() + " has been signed up in the: " + m.getAgeGroup() +
@@ -124,7 +126,7 @@ public class FrontDesk {
 
     // EFFECTS: prints profiles of all members in the form Name: AgeGroup
     private void checkMembers() throws IOException {
-        System.out.println("Name: Age||\n");
+        System.out.println("Username: Age||\n");
         library.readFile("members.txt");
         printInstructions();
     }
@@ -170,6 +172,36 @@ public class FrontDesk {
             input.nextLine();
             printInstructions();
         }
+    }
+
+    private void borrowBook() {
+        System.out.println("Please enter your username.");
+        String user = input.nextLine();
+        ArrayList<Book> bb = library.getBookList(user);
+        if (library.containsMember(user)) {
+            System.out.println("Here are the books you currently have borrowed: \n" +
+                    library.displayBorrowedBooks(bb));
+            System.out.println("Next, enter the title of the book you want to borrow.");
+            String book = input.nextLine();
+            library.borrow(user, library.findBook(book));
+            System.out.println("Here you go, enjoy!");
+        } else {
+            System.out.println("You are not registered, please sign up!");
+        }
+        printInstructions();
+    }
+
+    private void returnBook() {
+        System.out.println("Please enter your username.");
+        String user = input.nextLine();
+        ArrayList<Book> bb = library.getBookList(user);
+        System.out.println("Your currently borrowed books are: \n" +
+                library.displayBorrowedBooks(bb));
+        System.out.println("Which book would you like to return?");
+        String book = input.next();
+        library.returnBook(user, library.findBorrowedBook(user, book));
+        System.out.println("Thank you, have a nice day!");
+        printInstructions();
     }
 
 

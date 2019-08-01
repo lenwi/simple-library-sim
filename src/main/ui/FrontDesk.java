@@ -67,28 +67,6 @@ public class FrontDesk {
     private void parseInputOne(String str) throws IOException {
         if (str.length() > 0) {
             switch (str) {
-                case NEWS:
-                    readNews();
-                    break;
-                case BORROW:
-                    borrowBook();
-                    break;
-                case RETURN:
-                    returnBook();
-                    break;
-                case QUIT:
-                    runProgram = false;
-                    break;
-                default:
-                    parseInputTwo(str);
-            }
-        }
-    }
-
-    // EFFECTS: prints menu options and info depending on user input
-    private void parseInputTwo(String str) throws IOException {
-        if (str.length() > 0) {
-            switch (str) {
                 case SIGN_UP:
                     signUpMember();
                     break;
@@ -102,10 +80,33 @@ public class FrontDesk {
                     recommendBooks();
                     break;
                 default:
+                    parseInputTwo(str);
+            }
+        }
+    }
+
+    // EFFECTS: prints menu options and info depending on user input
+    private void parseInputTwo(String str) throws IOException {
+        if (str.length() > 0) {
+            switch (str) {
+                case NEWS:
+                    readNews();
+                    break;
+                case BORROW:
+                    borrowBook();
+                    break;
+                case RETURN:
+                    returnBook();
+                    break;
+                case QUIT:
+                    runProgram = false;
+                    break;
+                default:
                     System.out.println("Wrong input, try again.");
             }
         }
     }
+
 
     // MODIFIES: this
     // EFFECTS: sign up using prompts and user inputs

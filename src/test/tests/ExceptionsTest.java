@@ -1,11 +1,12 @@
-
+package tests;
 
 import model.library.Newspaper;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
+
 
 public class ExceptionsTest {
 

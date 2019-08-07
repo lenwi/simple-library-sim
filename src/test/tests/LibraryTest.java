@@ -2,6 +2,7 @@ package tests;
 
 import model.library.Book;
 import model.library.Library;
+import model.library.Newspaper;
 import model.members.AgeGroup;
 import model.members.Member;
 import org.junit.jupiter.api.BeforeEach;
@@ -57,12 +58,17 @@ public class LibraryTest {
     @Test
     public void testSaveLoad() throws IOException {
         Member m0;
+        Newspaper n0;
+        n0 = new Newspaper("test", "5", 4);
         m0 = new Member("tester");
         m0.setAgeGroup(AgeGroup.ADULT);
         testLibrary.addMember(m0);
         testLibrary.writeFile("test.txt");
         testLibrary.readFile("test.txt");
         assertTrue("test.txt".length() > 0);
+        n0.writeFile("newstest.txt");
+        n0.readFile("newstest.txt");
+        assertTrue("newstest.txt".length() > 0);
     }
 
 }

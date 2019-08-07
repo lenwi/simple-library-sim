@@ -11,7 +11,7 @@ import java.util.*;
 
 import static ui.LibraryFrontDesk.split;
 
-public class Library implements Loadable, Saveable {
+public class Library extends Observable implements Loadable, Saveable {
 
     static String FILENAME = "members.txt";
     static String SPLIT_CHAR = "\t";
@@ -23,6 +23,7 @@ public class Library implements Loadable, Saveable {
     public Library() {
         members = new ArrayList<>();
         books = new ArrayList<>();
+        addObserver(new NewMember());
     }
 
     @Override
@@ -80,6 +81,8 @@ public class Library implements Loadable, Saveable {
     // EFFECTS adds member m to the library
     public void addMember(Member m) {
         members.add(m);
+        setChanged();
+        notifyObservers(m.getName());
     }
 
     // MODIFIES: this

@@ -37,10 +37,10 @@ public class SimplesTest {
     }
 
     @Test
-    public void testSetReading() {
+    public void testSetTitle() {
         Readings b = new Book("1", "2");
         assertEquals("1", b.getTitle());
         b.setTitle("0");
-        assertEquals("0", b.getTitle());
+        assertTrue(b.getTitle().equals("0"));
     }
 }

@@ -35,14 +35,12 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/../../java-json.jar" />
+          <root url="jar://$MODULE_DIR$/lib/java-json.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="file://$MODULE_DIR$/../../java-json.jar" />
+          <root url="jar://$MODULE_DIR$/lib/java-json.jar!/" />
         </SOURCES>
-        <jarDirectory url="file://$MODULE_DIR$/../../java-json.jar" recursive="false" />
-        <jarDirectory url="file://$MODULE_DIR$/../../java-json.jar" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
   </component>

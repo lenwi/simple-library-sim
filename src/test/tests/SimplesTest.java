@@ -2,6 +2,7 @@ package tests;
 
 import model.library.Book;
 import model.library.Library;
+import model.library.Readings;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,5 +34,13 @@ public class SimplesTest {
         books.add(b1);
         assertTrue(books.contains(b1));
         testLibrary.getBooks().contains(b1);
+    }
+
+    @Test
+    public void testSetReading() {
+        Readings b = new Book("1", "2");
+        assertEquals("1", b.getTitle());
+        b.setTitle("0");
+        assertEquals("0", b.getTitle());
     }
 }

@@ -9,11 +9,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class MemberTest {
-    Member testMember;
+    private Member testMember;
 
     @BeforeEach
     public void setup() {
         testMember = new Member("name");
+    }
+
+    @Test
+    public void testGetName() {
+        Member m1 = new Member("me");
+        assertTrue(m1.getName().equals("me"));
     }
 
     @Test

@@ -1,6 +1,7 @@
 package model.library;
 
 import model.members.Member;
+import ui.NewMember;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,7 +14,6 @@ import static ui.LibraryFrontDesk.split;
 
 public class Library extends Observable implements Loadable, Saveable {
 
-    static String FILENAME = "members.txt";
     static String SPLIT_CHAR = "\t";
 
     private List<Member> members;
@@ -61,10 +61,6 @@ public class Library extends Observable implements Loadable, Saveable {
     // getters
     public List<Member> getMembers() {
         return members;
-    }
-
-    public Map<String, ArrayList<Book>> getHmMembers() {
-        return hmMembers;
     }
 
     public List<Book> getBooks() {

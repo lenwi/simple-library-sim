@@ -23,12 +23,6 @@ public class Member {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets this member's name to given name
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    // MODIFIES: this
     // EFFECTS: sets this member's age group to given age group
     public void setAgeGroup(AgeGroup ageGroup) {
         this.ageGroup = ageGroup;

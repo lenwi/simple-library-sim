@@ -1,4 +1,4 @@
-package model.library;
+package ui;
 
 import java.util.Observable;
 import java.util.Observer;

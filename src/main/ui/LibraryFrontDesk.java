@@ -2,8 +2,6 @@ package ui;
 
 import model.library.Book;
 import model.library.Library;
-import model.library.Newspaper;
-import model.members.Member;
 
 import java.io.IOException;
 import java.nio.file.Files;

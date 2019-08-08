@@ -84,9 +84,11 @@ public class LibraryTest {
         assertFalse(testLibrary.containsMember("2"));
         testLibrary.borrow("1", bw);
         testLibrary.borrow("1", bk);
+        assertEquals(testLibrary.borrow("1", bw), testLibrary.getBookList("1"));
         assertTrue(testLibrary.getBookList("1").contains(bw));
         assertEquals(testLibrary.findBorrowedBook("1", "me"), bw);
         testLibrary.returnBook("1", bw);
+        assertEquals(testLibrary.returnBook("1", bw), testLibrary.getBookList("1"));
         assertTrue(testLibrary.getBookList("1").contains(bk));
         assertFalse(testLibrary.getBookList("1").contains(bw));
     }

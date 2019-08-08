@@ -29,11 +29,6 @@ public class Newspaper extends Readings implements Saveable,Loadable {
         return quantity;
     }
 
-    // EFFECTS: returns the issue number
-    public String getIssueNum() {
-        return category;
-    }
-
     // MODIFIES: this
     // EFFECTS: sets this newspaper's category to given category
     @Override

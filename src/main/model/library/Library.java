@@ -1,7 +1,6 @@
 package model.library;
 
 import model.members.Member;
-import ui.NewMember;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,7 +11,7 @@ import java.util.*;
 
 import static ui.LibraryFrontDesk.split;
 
-public class Library extends Observable implements Loadable, Saveable {
+public class Library implements Loadable, Saveable {
 
     static String SPLIT_CHAR = "\t";
 
@@ -23,7 +22,6 @@ public class Library extends Observable implements Loadable, Saveable {
     public Library() {
         members = new ArrayList<>();
         books = new ArrayList<>();
-        addObserver(new NewMember());
     }
 
     @Override
@@ -77,8 +75,6 @@ public class Library extends Observable implements Loadable, Saveable {
     // EFFECTS adds member m to the library
     public void addMember(Member m) {
         members.add(m);
-        setChanged();
-        notifyObservers(m.getName());
     }
 
     // MODIFIES: this

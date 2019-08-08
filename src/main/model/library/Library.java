@@ -129,16 +129,9 @@ public class Library implements Loadable, Saveable {
     public synchronized List<Book> borrow(String user, Book book) {
         List<Book> bookList = hmMembers.get(user);
 
-        // if list does not exist create it
-        if (bookList == null) {
-            bookList = new ArrayList<Book>();
+        if (!bookList.contains(book)) {
             bookList.add(book);
-        } else {
-            // add if item is not already in list
-            if (!bookList.contains(book)) {
-                bookList.add(book);
-                books.remove(book);
-            }
+            books.remove(book);
         }
         return bookList;
     }
@@ -166,24 +159,5 @@ public class Library implements Loadable, Saveable {
             books.add(book);
         }
         return bookList;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Library library = (Library) o;
-        return Objects.equals(hmMembers, library.hmMembers)
-                && Objects.equals(books, library.books);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(hmMembers, books);
     }
 }

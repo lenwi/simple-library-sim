@@ -9,12 +9,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 public class LibraryTest {
     Library testLibrary;
+    private Map<String, ArrayList<Book>> hmMembers = new HashMap<>();
 
     @BeforeEach
     public void setup() {
@@ -71,4 +75,40 @@ public class LibraryTest {
         assertTrue("newstest.txt".length() > 0);
     }
 
+    @Test
+    public void testAddHashMember() {
+        Book bw = new Book("me", "meme");
+        Book bk = new Book("ms", "meme");
+        testLibrary.addMemberHash("1");
+        assertTrue(testLibrary.containsMember("1"));
+        assertFalse(testLibrary.containsMember("2"));
+        testLibrary.borrow("1", bw);
+        testLibrary.borrow("1", bk);
+        assertTrue(testLibrary.getBookList("1").contains(bw));
+        assertEquals(testLibrary.findBorrowedBook("1", "me"), bw);
+        testLibrary.returnBook("1", bw);
+        assertTrue(testLibrary.getBookList("1").contains(bk));
+        assertFalse(testLibrary.getBookList("1").contains(bw));
+    }
+
+    @Test
+    public void testDisplayBook() {
+        Book be = new Book("me", "meme");
+        ArrayList<Book> bb = new ArrayList<>();
+        assertEquals(testLibrary.displayBorrowedBooks(bb), "" + "");
+        bb.add(be);
+        assertEquals(testLibrary.displayBorrowedBooks(bb), "me" + "\n" + "");
+    }
+
+    @Test
+    public void testFindBook() {
+        Book b1;
+        Book b2;
+        b1 = new Book("The Lord of the Rings", "Fantasy");
+        b2 = new Book("Murder on the Orient Express", "Mystery");
+        testLibrary.addBook(b1);
+        testLibrary.addBook(b2);
+        assertEquals(testLibrary.findBook("The Lord of the Rings"), b1);
+        assertEquals(testLibrary.findBook("Murder on the Orient Express"), b2);
+    }
 }

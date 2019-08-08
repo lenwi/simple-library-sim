@@ -35,7 +35,7 @@ public class GUI extends Application {
 
         VBox left = new VBox();
         Button b4 = new Button("s");
-        Button b5= new Button("fdl");
+        Button b5 = new Button("fdl");
         Button b6 = new Button("di");
         top.getChildren().addAll(b4, b5, b6);
 

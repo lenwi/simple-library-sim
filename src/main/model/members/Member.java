@@ -37,7 +37,7 @@ public class Member {
             setAgeGroup(CHILD);
         } else if (i >= 13 && i <= 18) {
             setAgeGroup(ADOLESCENCE);
-        } else if (i >= 19) {
+        } else {
             setAgeGroup(ADULT);
         }
     }

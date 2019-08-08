@@ -32,7 +32,6 @@ public class Library implements Loadable, Saveable {
 
         PrintWriter writer = new PrintWriter(new FileWriter(file, true));
         for (Member m: members) {
-            System.out.println("Writing member details: " + m.getName());
             writer.println(m.getName() + SPLIT_CHAR + m.getAgeGroup());
         }
         writer.flush();

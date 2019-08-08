@@ -26,6 +26,8 @@ public class MemberTest {
     public void testSortAge() {
         testMember.sortAge(0);
         assertTrue(testMember.getAgeGroup() == AgeGroup.CHILD);
+        assertEquals(testMember.getAgeGroup(), AgeGroup.CHILD);
+        assertFalse(testMember.getAgeGroup() == AgeGroup.ADULT);
         testMember.sortAge(5);
         assertTrue(testMember.getAgeGroup() == AgeGroup.CHILD);
         testMember.sortAge(12);
@@ -34,6 +36,7 @@ public class MemberTest {
         assertFalse(testMember.getAgeGroup() == AgeGroup.ADULT);
         testMember.sortAge(13);
         assertTrue(testMember.getAgeGroup() == AgeGroup.ADOLESCENCE);
+        assertEquals(testMember.getAgeGroup(), AgeGroup.ADOLESCENCE);
         testMember.sortAge(15);
         assertTrue(testMember.getAgeGroup() == AgeGroup.ADOLESCENCE);
         testMember.sortAge(18);

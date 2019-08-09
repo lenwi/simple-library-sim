@@ -14,6 +14,12 @@ import static ui.LibraryFrontDesk.split;
 public class Library implements Loadable, Saveable {
 
     static String SPLIT_CHAR = "\t";
+    private Newspaper newspaper;
+    private Book b1;
+    private Book b2;
+    private Book b3;
+    private Book b4;
+    private Book b5;
 
     private List<Member> members;
     private Map<String, ArrayList<Book>> hmMembers = new HashMap<>();
@@ -22,6 +28,19 @@ public class Library implements Loadable, Saveable {
     public Library() {
         members = new ArrayList<>();
         books = new ArrayList<>();
+        b1 = new Book("The Lord of the Rings", "Fantasy");
+        b2 = new Book("Murder on the Orient Express", "Mystery");
+        b3 = new Book("It", "Horror");
+        b4 = new Book("The Cat in the Hat", "Children's Book");
+        b5 = new Book("Eragon", "Fantasy");
+
+        books.add(b1);
+        books.add(b2);
+        books.add(b3);
+        books.add(b4);
+        books.add(b5);
+
+        this.newspaper = new Newspaper("UBC NEWS", "01", 10);
     }
 
     @Override

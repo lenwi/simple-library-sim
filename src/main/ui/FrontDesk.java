@@ -14,7 +14,6 @@ public class FrontDesk {
     private static final String SIGN_UP = "sign up";
     private static final String CHECK_MEMBERS = "check";
     private static final String BROWSE = "browse";
-    private static final String RECOMMEND = "recommend";
     private static final String NEWS = "news";
     private static final String BORROW = "borrow";
     private static final String RETURN = "return";
@@ -56,7 +55,6 @@ public class FrontDesk {
         System.out.println("\nEnter: \n'" + SIGN_UP + "' to activate a library account.");
         System.out.println("'" + CHECK_MEMBERS + "' to find other members and any books they have borrowed.");
         System.out.println("'" + BROWSE + "' to browse books.");
-        System.out.println("'" + RECOMMEND + "' to discover a book based on category.");
         System.out.println("'" + NEWS + "' to read the news.");
         System.out.println("'" + BORROW + "' to check out a book.");
         System.out.println("'" + RETURN + "' to return a book.");
@@ -75,9 +73,6 @@ public class FrontDesk {
                     break;
                 case BROWSE:
                     browseBooks();
-                    break;
-                case RECOMMEND:
-                    recommendBooks();
                     break;
                 default:
                     parseInputTwo(str);
@@ -147,20 +142,6 @@ public class FrontDesk {
         System.out.println("Title: Genre||\n");
         for (Book b: library.getBooks()) {
             System.out.println(b.getTitle() + ": " + b.getCategory());
-        }
-        printInstructions();
-    }
-
-    // EFFECTS: prints a list of books of a given genre
-    private void recommendBooks() {
-        System.out.println("Please select a category: '" + FANTASY + "', '" + MYSTERY + "', '" + CHILDREN_BOOK
-                + "'," + " '" + HORROR + "' ");
-        String genre = input.nextLine();
-        System.out.println("Here are some " + genre + " books: \n");
-        for (Book b: library.getBooks()) {
-            if (b.getCategory().equals(genre)) {
-                System.out.println(b.getTitle());
-            }
         }
         printInstructions();
     }

@@ -83,7 +83,7 @@ public class Newspaper extends Readings implements Saveable,Loadable {
             setCategory(num);
             setQuantity(Integer.parseInt(quantity));
 
-            System.out.println("Here is " + getTitle() + " " + issue);
+            System.out.println("Here is " + getTitle());
             System.out.println("\n There are " + quantity + " left of "
                     + issue + " " + hash + " " + num + ".");
         }

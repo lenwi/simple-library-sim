@@ -15,9 +15,13 @@ import model.library.Book;
 import model.library.Library;
 import model.library.Newspaper;
 import model.members.Member;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -63,7 +67,7 @@ public class LibraryFrontDesk extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) throws IOException, JSONException {
         window = primaryStage;
         window.setTitle("LibraryFrontDesk");
 
@@ -79,7 +83,10 @@ public class LibraryFrontDesk extends Application {
         Button b5 = makeButton5();
         Button b6 = makeButton6();
 
-        vbox.getChildren().addAll(b1, b2, b3, b5, b6);
+        Label weather = weatherAPI();
+        weather.setStyle("-fx-font: italic 12 palatino;" + "-fx-text-fill: #696969;");
+
+        vbox.getChildren().addAll(b1, b2, b3, b5, b6, weather);
         GridPane.setConstraints(vbox, 9, 5);
 
         grid.getChildren().addAll(welcomeText, vbox);
@@ -451,6 +458,41 @@ public class LibraryFrontDesk extends Application {
         ArrayList<Book> bb = library.getBookList(user);
         String book = titlen;
         library.returnBook(user, library.findBorrowedBook(user, book));
+    }
+
+    private static String readAll(Reader rd) throws IOException {
+        StringBuilder sb = new StringBuilder();
+        int cp;
+        while ((cp = rd.read()) != -1) {
+            sb.append((char) cp);
+        }
+        return sb.toString();
+    }
+
+    public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
+        InputStream is = new URL(url).openStream();
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            String jsonText = readAll(rd);
+            JSONObject json = new JSONObject(jsonText);
+            return json;
+        } finally {
+            is.close();
+        }
+    }
+
+    public Label weatherAPI() throws IOException, JSONException {
+        JSONObject json = readJsonFromUrl("https://api.openweathermap.org/data/2.5/weather?q=Vancouver,ca&APPID="
+                + "1cf7746e673b29fee70c1502cbaa77fc");
+        String result = "";
+        JSONArray arr = json.getJSONArray("weather");
+        for (int i = 0; i < arr.length(); i++) {
+            String d = arr.getJSONObject(i).getString("description");
+            result = "\nCurrent weather for Vancouver: " + d;
+        }
+        int c = json.getJSONObject("main").getInt("temp");
+        result = result + ", " + (c - 273) + " °C";
+        return getLabel(result, 7);
     }
 
 }
